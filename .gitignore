@@ -108,3 +108,6 @@ InitTestScene*.unity*
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
 /Aulas2D/Library
+/Aulas2D/Temp
+/Aulas2D/UserSettings
+/Aulas2D/UserSettings/Layouts
