@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(CircleCollider2D))]
 public class TopDownMovement : MonoBehaviour
@@ -16,6 +17,9 @@ public class TopDownMovement : MonoBehaviour
     private Rigidbody2D rb_;
     private Vector2 input_;
 
+    private List<GameObject> targets_ = new List<GameObject>();
+    private float detectionDist = 2f;
+
     private void Start()
     {
         hp_ = maxHP;
@@ -24,6 +28,24 @@ public class TopDownMovement : MonoBehaviour
         rb_ = GetComponent<Rigidbody2D>();
         rb_.gravityScale = 0f;
         rb_.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+        float minDistanceDetected = detectionDist;
+        int foundIndex = -1;
+
+        for (int i = 0; i < targets_.Count; i++)
+        {
+            float dist = Vector3.Distance(targets_[i].transform.position, transform.position);
+            if (dist < minDistanceDetected)
+            {
+                minDistanceDetected = dist;
+                foundIndex = i;
+            }
+        }
+
+        if (foundIndex >= 0)
+        {
+            Transform finalTarget = targets_[foundIndex].transform;
+        }
     }
 
     private void Update()
